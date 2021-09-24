@@ -12,6 +12,7 @@ namespace ProductPromotions.Services
         
         public int GetTotalPrice(List<Product> products)
         {
+            var promotions = new PromotionService();
             int aCount = 0;
             int aPrice = 50;
             int bCount = 0;
@@ -43,10 +44,30 @@ namespace ProductPromotions.Services
                         break;
                 }
             }
-            int totalPriceOfA = (aCount / 3) * 130 + (aCount % 3 * aPrice);
-            int totalPriceOfB = (bCount / 2) * 45 + (bCount % 2 * bPrice);
+            var totalPriceOfA = aCount * aPrice;
+            var promotionForA = promotions.GetPromotionByProduct("A");
+            if (promotionForA != null)
+            {
+                totalPriceOfA = (aCount / promotionForA.TotalCount) * promotionForA.DiscountPrice + (aCount % promotionForA.TotalCount * aPrice);
+            }
+            int totalPriceOfB = (bCount * bPrice);
+            var promotionForB = promotions.GetPromotionByProduct("B");
+            if (promotionForB != null)
+            {
+                totalPriceOfB = (bCount / promotionForB.TotalCount) * promotionForB.DiscountPrice + (bCount % promotionForB.TotalCount * bPrice);
+            }
             int totalPriceOfC = (cCount * cPrice);
+            var promotionForC = promotions.GetPromotionByProduct("C");
+            if (promotionForC != null)
+            {
+                totalPriceOfC = (cCount / promotionForC.TotalCount) * promotionForC.DiscountPrice + (cCount % promotionForC.TotalCount * cPrice);
+            }
             int totalPriceOfD = (dCount * dPrice);
+            var promotionofD = promotions.GetPromotionByProduct("D");
+            if (promotionofD != null)
+            {
+                totalPriceOfD = (dCount / promotionofD.TotalCount) * promotionofD.DiscountPrice + (dCount % promotionofD.TotalCount * dPrice);
+            }
             return totalPriceOfA + totalPriceOfB + totalPriceOfC + totalPriceOfD;
         }
     }

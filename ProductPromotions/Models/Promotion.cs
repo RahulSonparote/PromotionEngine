@@ -10,6 +10,6 @@ namespace ProductPromotions.Models
     {
         public string ProductId { get; set; }
         public int TotalCount { get; set; }
-        public decimal DiscountPrice { get; set; }
+        public int DiscountPrice { get; set; }
     }
 }

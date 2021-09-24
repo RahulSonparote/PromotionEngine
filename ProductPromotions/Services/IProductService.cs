@@ -9,7 +9,6 @@ namespace ProductPromotions.Services
 {
     public interface IProductService
     {
-        void GetPriceByType(Product product);
         int GetTotalPrice(List<Product> products);
     }
 }

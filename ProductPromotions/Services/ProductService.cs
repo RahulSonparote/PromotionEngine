@@ -9,14 +9,45 @@ namespace ProductPromotions.Services
 {
     public class ProductService : IProductService
     {
-        public void GetPriceByType(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public int GetTotalPrice(List<Product> products)
         {
-            throw new NotImplementedException();
+            int aCount = 0;
+            int aPrice = 50;
+            int bCount = 0;
+            int bPrice = 30;
+            int cCount = 0;
+            int cPrice = 20;
+            int dCount = 0;
+            int dPrice = 15;
+
+            foreach (Product pr in products)
+            {
+                switch (pr.Id)
+                {
+                    case "A":
+                    case "a":
+                        aCount += 1;
+                        break;
+                    case "B":
+                    case "b":
+                        bCount += 1;
+                        break;
+                    case "C":
+                    case "c":
+                        cCount += 1;
+                        break;
+                    case "D":
+                    case "d":
+                        dCount += 1;
+                        break;
+                }
+            }
+            int totalPriceOfA = (aCount / 3) * 130 + (aCount % 3 * aPrice);
+            int totalPriceOfB = (bCount / 2) * 45 + (bCount % 2 * bPrice);
+            int totalPriceOfC = (cCount * cPrice);
+            int totalPriceOfD = (dCount * dPrice);
+            return totalPriceOfA + totalPriceOfB + totalPriceOfC + totalPriceOfD;
         }
     }
 }
